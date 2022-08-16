@@ -4,6 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+pyyaml = "==5.4"
+tqdm = "==4.56.0"
+pygments = "==2.9.0"
+certifi = "==2017.4.17"
+chardet = "*"
+idna = "*"
+urllib3 = "*"
+requests = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 
