@@ -1,4 +1,5 @@
 from datetime import datetime
+from os.path import exists
 from time import sleep
 from sqlalchemy import create_engine
 from sqlalchemy.ext.compiler import compiles
@@ -18,9 +19,11 @@ def init_db() -> Engine:
     return engine
 
 if __name__ == "__main__":
-    engine = init_db()
     last_run = None
     while True:
+        if not exists("./db.sqlite"):
+            engine = init_db()
+            last_run = None
         try:
             with Session(engine) as session:
                 print(f"[siva:backend/sync_users] Operation started at '{datetime.now()}'")
@@ -34,4 +37,4 @@ if __name__ == "__main__":
             print(f"[siva:backend/sync_users] Operation failed at '{datetime.now()}'")
             sleep(15)
             continue
-        sleep(2)
+        sleep(86400) # 86400s -> 1d
