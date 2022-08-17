@@ -26,15 +26,15 @@ if __name__ == "__main__":
             last_run = None
         try:
             with Session(engine) as session:
-                print(f"[siva:backend/sync_users] Operation started at '{datetime.now()}'")
+                print(f"[siva:backend/sync] Operation started at '{datetime.now()}'")
                 session.execute("PRAGMA foreign_keys = ON;")
                 sync_users(session, last_run, 21, 22)
                 session.commit()
                 session.close()
-                print(f"[siva:backend/sync_users] Operation finished correctly at '{datetime.now()}'")
+                print(f"[siva:backend/sync] Operation finished correctly at '{datetime.now()}'")
                 last_run = datetime.now()
         except Exception:
-            print(f"[siva:backend/sync_users] Operation failed at '{datetime.now()}'")
+            print(f"[siva:backend/sync] Operation failed at '{datetime.now()}'")
             sleep(15)
             continue
         sleep(86400) # 86400s -> 1d
